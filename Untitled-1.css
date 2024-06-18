@@ -212,45 +212,31 @@ footer {
 
 .gallery-section {
     display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
 }
 
 .carousel {
     display: flex;
-    transition: transform 0.5s ease;
-    scroll-snap-align: start;
-    scroll-padding: 50px;
-    scroll-behavior: smooth;
     width: 100%;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.carousel::-webkit-scrollbar {
-    display: none;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
 }
 
 .carousel-item {
-    flex: 0 0 auto;
-    width: 100%;
+    flex: 0 0 100%;
     scroll-snap-align: start;
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.carousel-item.active {
-    opacity: 1;
 }
 
 .carousel-image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
 }
+
 
 .submenu {
     display: none;
