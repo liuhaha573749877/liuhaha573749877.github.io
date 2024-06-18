@@ -1,4 +1,4 @@
-
+/* 基础样式 */
 *,
 *::before,
 *::after {
@@ -16,8 +16,6 @@ body {
     line-height: 1.6;
 }
 
-
-
 :root {
     --primary-color: #333;
     --secondary-color: #555;
@@ -26,7 +24,6 @@ body {
     --hero-text-color: rgb(240, 240, 240);
     --fade-duration: 0.5s;
 }
-
 
 header {
     background-color: var(--primary-color);
@@ -65,7 +62,6 @@ nav ul li a:focus {
     outline: none;
 }
 
-
 .hero {
     position: relative;
     height: 100vh;
@@ -102,15 +98,13 @@ nav ul li a:focus {
     z-index: 1;
 }
 
-
 main {
-    margin-top: 4em; 
+    margin-top: 4em;
 }
 
 section {
     padding: 2em;
 }
-
 
 .carousel {
     display: flex;
@@ -125,22 +119,21 @@ section {
     transition: transform 0.5s ease;
 }
 
-
 #contact {
-    text-align: center; 
-    padding: 50px 0; 
+    text-align: center;
+    padding: 50px 0;
 }
 
 #contactForm {
     width: 100%;
     max-width: 500px;
-    margin: 0 auto; 
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px; 
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #contactForm label {
@@ -153,7 +146,7 @@ section {
     max-width: 400px;
     padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 #contactForm .error {
@@ -177,19 +170,20 @@ section {
     background-color: #0056b3;
 }
 
-#about, #services {
+#about,
+#services {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
     padding: 20px;
 }
+
 #services ul {
     list-style-type: none;
-    padding-left: 0; 
+    padding-left: 0;
 }
 
-/* Footer styles */
 footer {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -199,24 +193,65 @@ footer {
     bottom: 0;
     width: 100%;
 }
-#about {  
-    width: 100%; /* 占据整个容器宽度 */  
-    padding: 20px; /* 为视频添加一些内边距，以防止过于贴边 */  
-    /* 其他样式如背景色、边框等可以根据需要添加 */  
-}  
-  
-#about h2 {  
-    /* 为标题添加样式，确保与视频有一定的间隔 */  
-    margin-bottom: 20px;  
-}  
-  
-#company-video {  
-    width: 100%; /* 视频宽度为100%，将自动调整高度以保持原始宽高比 */  
-    height: auto; /* 高度自动 */  
-    display: block; /* 移除视频下方的默认空白 */  
-    margin: 0 auto; /* 如果需要水平居中 */  
+
+#about {
+    width: 100%;
+    padding: 20px;
 }
-/* Submenu styles */
+
+#about h2 {
+    margin-bottom: 20px;
+}
+
+#company-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.gallery-section {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    scroll-snap-align: start;
+    scroll-padding: 50px;
+    scroll-behavior: smooth;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 100%;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-item.active {
+    opacity: 1;
+}
+
+.carousel-image {
+    max-width: 100%;
+    height: auto;
+}
+
 .submenu {
     display: none;
     position: absolute;
@@ -249,46 +284,75 @@ nav ul li:hover .submenu {
     background-color: var(--secondary-color);
     outline: none;
 }
-/* 假设您的CSS文件名为Untitled-1.css */  
-  
-#services {  
-    display: flex;  
-    justify-content: space-around; /* 在元素之间添加间距 */  
-    padding: 20px;  
-}  
-  
-.service-item {  
-    flex: 1 0 30%; /* 使得每个项目占据大约1/3的空间，但允许根据内容伸缩 */  
-    margin: 10px;  
-    text-align: center;  
-}  
-  
-.service-icon {  
-    width: 100px; /* 图标大小，根据需要调整 */  
-    height: 100px;  
-    margin-bottom: 10px;  
-}  
-  
-/* 注意：.service-image 类目前并未在HTML中使用，但如果您想要添加图片，可以这样定义样式 */  
-.service-image {  
-    width: 100%; /* 图片宽度，根据需要调整 */  
-    height: auto;  
-    margin-top: 10px;  
-}  
-  
-.service-item h3 {  
-    margin-top: 10px;  
-}  
-  
-.service-item p {  
-    margin: 10px 0;  
+
+#services {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
 }
-/* Animation keyframes */
+
+.service-item {
+    flex: 1 0 30%;
+    margin: 10px;
+    text-align: center;
+}
+
+.service-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.service-item h3 {
+    margin-top: 10px;
+}
+
+.service-item p {
+    margin: 10px 0;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
+    }
+}
+
+/* 适配移动设备 */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 0.5em 0;
+    }
+
+    .hero-text {
+        font-size: 3em;
+    }
+
+    .carousel {
+        max-width: 100%;
+    }
+
+    #services {
+        flex-direction: column;
+    }
+
+    #contactForm input,
+    #contactForm textarea,
+    #contactForm button {
+        max-width: 100%;
+    }
+
+    header, footer {
+        padding: 0.5em 0;
+    }
+
+    section {
+        padding: 1em;
     }
 }
