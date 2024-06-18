@@ -1,63 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
     const images = document.querySelectorAll(".carousel img");
+    const spans = document.querySelectorAll('.hero-text span');
+    const heroImage = document.getElementById('heroImage');
+    const contactForm = document.getElementById("contactForm");
     let currentIndex = 0;
     const carouselInterval = 3000;
-    let autoSlide = setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        showImage(currentIndex);
-    }, carouselInterval);
+    let autoSlide;
 
-    
+    // 初始化函数
+    function init() {
+        startAutoSlide();
+        fadeOutText();
+        addEventListeners();
+    }
+
+    // 自动轮播功能
+    function startAutoSlide() {
+        autoSlide = setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }, carouselInterval);
+    }
+
     function showImage(index) {
         images.forEach((img, i) => {
             img.style.transform = `translateX(-${index * 100}%)`;
         });
     }
-    
-    // 点击图片自动向下
-    const heroImage = document.getElementById('heroImage');
 
-    
-    heroImage.addEventListener('click', () => {
+    // 点击英雄图片滚动到下一部分
+    function scrollToNextSection() {
         const nextSection = document.getElementById('gallery');
-        const scrollToPosition = nextSection.offsetTop;
         window.scrollTo({
-            top: scrollToPosition,
-            behavior: 'smooth' 
+            top: nextSection.offsetTop,
+            behavior: 'smooth'
         });
-    });
+    }
 
-    // 空格键切换图片
-    document.addEventListener("keydown", (event) => {
-        if (event.key === " ") { 
-            event.preventDefault(); //阻止默认的向下滑动
-
+    // 键盘事件处理
+    function handleKeyDown(event) {
+        if (event.key === " ") {
+            event.preventDefault();
             currentIndex = (currentIndex + 1) % images.length;
             showImage(currentIndex);
-            
-            clearInterval(autoSlide);
-            autoSlide = setInterval(() => {
-                currentIndex = (currentIndex + 1) % images.length;
-                showImage(currentIndex);
-            }, carouselInterval);
+            restartAutoSlide();
         }
-    });
+    }
 
-    
-    const spans = document.querySelectorAll('.hero-text span');
+    function restartAutoSlide() {
+        clearInterval(autoSlide);
+        startAutoSlide();
+    }
 
+    // 淡出文本动画
     function fadeOutText() {
         spans.forEach((span, index) => {
             setTimeout(() => {
                 span.style.opacity = '0';
-            }, index * 100); 
+            }, index * 100);
         });
     }
 
-    
-    fadeOutText();
-
-    // 表单验证函数
+    // 表单验证
     function validateForm() {
         const nameInput = document.getElementById("name").value;
         const emailInput = document.getElementById("email").value;
@@ -65,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailError = document.getElementById("emailError");
         let valid = true;
 
-        
         nameError.textContent = "";
         emailError.textContent = "";
 
@@ -83,15 +86,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 表单提交处理
-    const contactForm = document.getElementById("contactForm");
-    contactForm.addEventListener("submit", function(event) {
+    function handleFormSubmit(event) {
         event.preventDefault();
-
-        
         if (validateForm()) {
             alert("感谢您联系我们！");
             contactForm.reset();
         }
-    });
+    }
 
+    // 添加事件监听器
+    function addEventListeners() {
+        heroImage.addEventListener('click', scrollToNextSection);
+        document.addEventListener("keydown", handleKeyDown);
+        contactForm.addEventListener("submit", handleFormSubmit);
+    }
+
+    init();
 });
